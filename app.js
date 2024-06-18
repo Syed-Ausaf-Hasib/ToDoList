@@ -1,10 +1,10 @@
 // i request express bodyparser 
 // jshint esversion: 6
 // learning gittt
+// creating a branch
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
