@@ -1,0 +1,117 @@
+html {
+    background-color: #1E1E1E;
+    background-image: -webkit-linear-gradient(65deg, #2a0000 50%, #1E1E1E 50%);
+    min-height: 1000px;
+    font-family: 'Helvetica Neue';
+  }
+  
+  h1 {
+    color: #2a0000;
+    padding: 10px;
+  }
+  
+  .box {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #2D2D2D;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.5);
+  }
+  
+  #heading {
+    background-color: #444444;
+    text-align: center;
+  }
+  
+  .item {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333333;
+  }
+  
+  .item:last-child {
+    border-bottom: 0;
+  }
+  
+  input:checked + p {
+    /* text-decoration: line-through;
+    text-decoration-color: #2a0000; */
+    animation: done 0.69s forwards ease-in;
+  }
+  
+  input[type="checkbox"] {
+    margin: 20px;
+  }
+  
+  p {
+    margin: 0;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 200;
+    color: #b6b6b6;
+  }
+  
+  form {
+    text-align: center;
+    margin-left: 20px;
+  }
+  
+  button {
+    min-height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: #2a0000;
+    color: #E4E9FD;
+    font-size: 30px;
+    padding-bottom: 5px;
+    border-width: 0;
+  }
+  
+  input[type="text"] {
+    text-align: center;
+    height: 60px;
+    top: 10px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 200;
+    width: 313px;
+    color: #E4E9FD;
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    box-shadow: inset 0 -3px 0 0 #6A6A6A;
+  }
+  
+  ::placeholder {
+    color: #7F7F7F;
+    opacity: 1;
+  }
+  
+  footer {
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-top: 65vh;
+  }
+
+  @keyframes done {
+    0%{
+        margin: 0;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: 200;
+        color: #b6b6b6;
+    }
+    100%{
+        margin: 0;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: 200;
+        color: #2a0000;
+        opacity: 90%;
+    }
+  }
+  

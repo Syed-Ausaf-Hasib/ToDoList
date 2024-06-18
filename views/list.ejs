@@ -1,0 +1,43 @@
+<%- include("header") -%>
+<body>
+    <div class="box" id="heading">
+        <h1>Today: <%= kindOfDay %></h1>
+    </div>
+    <div class="box">
+        <% for(var i=0; i<newListItems.length; i++){ %>
+            <div class="item">
+                <input type="checkbox">
+                <p><%=newListItems[i]%></p>
+            </div>
+        <% } %>
+        <form class="item" id="itemForm" action="/" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autofocus autocomplete="off">
+            <button type="submit" name="button">+</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("itemForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var newItem = this.newItem.value.trim();
+            if (newItem !== "") {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/");
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var newItemHtml = `
+                            <div class="item">
+                                <input type="checkbox">
+                                <p>${newItem}</p>
+                            </div>`;
+                        document.querySelector(".box").insertAdjacentHTML('beforeend', newItemHtml);
+                        document.getElementById("itemForm").reset();
+                    }
+                };
+                xhr.send("newItem=" + encodeURIComponent(newItem));
+            }
+        });
+    </script>
+</body>
+<!-- <%- include("footer") -%> -->
