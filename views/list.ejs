@@ -1,43 +1,71 @@
 <%- include("header") -%>
 <body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="tech">
+            <p>Tech Used:</p>
+            <ul>
+                <li>EJS</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>NodeJS</li>
+                <li>ExpressJS</li>
+                <li>MongoDB</li>
+            </ul>
+        </div>
+        <div class="tools">
+            <p>Tools Used:</p>
+            <ul>
+                <li>Git</li>
+                <li>GitHub</li>
+                <li>Heroku</li>
+                <li>MongoAtlas</li>
+            </ul>
+        </div>
+    </div>
+    <span class="openbtn" onclick="openNav()">&#9776;</span>
     <div class="box" id="heading">
-        <h1>Today: <%= kindOfDay %></h1>
+        <h1><%= kindOfDay %></h1>
     </div>
     <div class="box">
-        <% for(var i=0; i<newListItems.length; i++){ %>
+        <!-- <% for(var i=0; i<newListItems.length; i++){ %>
             <div class="item">
                 <input type="checkbox">
-                <p><%=newListItems[i]%></p>
+                <p><%=newListItems[i].name%></p>
             </div>
-        <% } %>
+        <% } %> -->
+        <% newListItems.forEach(function(item){ %>
+            <form action="/check" method="post">
+                <div class="item scroll">
+                    <% if(item.check=="on"){ %>
+                        <input type="hidden" name="checkbox" value="<%=item._id%>">
+                        <input type="checkbox" name="checkbox" value="<%=item._id%>" checked onclick="this.form.submit()">
+                    <% } else{ %>
+                        <input type="hidden" name="checkbox" value="<%=item._id%>">
+                        <input type="checkbox" name="checkbox" value="<%=item._id%>" onclick="this.form.submit()">
+                    <% } %>
+                    <p><%=item.name%></p>
+                </div>
+            </form>
+        <% }) %>
+
         <form class="item" id="itemForm" action="/" method="post">
             <input type="text" name="newItem" placeholder="New Item" autofocus autocomplete="off">
-            <button type="submit" name="button">+</button>
+            <button type="submit" class="add" name="button">+</button>
+        </form>
+
+        <form class="delete" action="/delete" method="post">
+            <button type="submit" class="delete" name="delete">Delete Checked</button>
         </form>
     </div>
-
-    <script>
-        document.getElementById("itemForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            var newItem = this.newItem.value.trim();
-            if (newItem !== "") {
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/");
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        var newItemHtml = `
-                            <div class="item">
-                                <input type="checkbox">
-                                <p>${newItem}</p>
-                            </div>`;
-                        document.querySelector(".box").insertAdjacentHTML('beforeend', newItemHtml);
-                        document.getElementById("itemForm").reset();
-                    }
-                };
-                xhr.send("newItem=" + encodeURIComponent(newItem));
-            }
-        });
-    </script>
 </body>
-<!-- <%- include("footer") -%> -->
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<%- include("footer") -%>
