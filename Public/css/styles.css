@@ -48,23 +48,8 @@ input:checked+p {
   animation: done 0.5s forwards ease-in;
 }
 
-.checkbox{
-  margin-left: 20px;
-  margin-right: 20px;
-  background-color:#444444;
-  border: 2px solid #000000;
-  width: 20px;
-  height: 20px;
-  border-radius: 100%;
-}
-.checked{
-  margin-left: 20px;
-  margin-right: 20px;
-  background-color:#2a0000;
-  border: 2px solid #2a0000;
-  width: 20px;
-  height: 20px;
-  border-radius: 100%;
+input[type="checkbox"] {
+  margin: 20px;
 }
 
 p {
