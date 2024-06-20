@@ -6,33 +6,59 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
+const mongoose = require("mongoose");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("Public"));
 app.set('view engine', 'ejs');
 
-var items = [];
-// var items=['Buy Food','Cook Food','Eat Food'];
-app.get("/", function (req, res) {
-    var today = new Date();
-    var options = {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long'
-    };
-    var day = today.toLocaleDateString("en-US", options);
+mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});
+const itemsSchema = {
+    name: String
+};
+const Item=mongoose.model("Item", itemsSchema);
 
-    res.render("list", { kindOfDay: day, newListItems: items });
+// const item1 = new Item({
+//     name:"Running"
+// });
+// const item2 = new Item({
+//     name:"Crying"
+// });
+// const item3 = new Item({
+//     name:"Coding"
+// });
+// const defaultItems = [item1,item2,item3];
+// Item.insertMany(defaultItems);
+
+// const items=[];
+app.get("/", function (req, res) {
+    // var today = new Date();
+    // var options = {
+    //     weekday: 'long',
+    //     day: 'numeric',
+    //     month: 'long'
+    // };
+    // var day = today.toLocaleDateString("en-US", options);
+    async function finding(){
+        try{
+            const founditems=await Item.find({});
+            res.render("list", { kindOfDay: 'Today', newListItems: founditems });
+        }
+        catch{
+            console.log("Some error occurred!!");
+        }
+    }
+    finding();
 });
 
-// app.get("/del",function(req,res){
-//     res.render("delete");
-// });
-
 app.post("/", function (req, res) {
-    var item = req.body.newItem;
-    items.push(item);
+    const itemName = req.body.newItem;
+    // items.push(item); coz items array doesnt exist now
+    const item = new Item({
+        name: itemName
+    })
+    item.save();
     res.redirect('/');
 });
 
