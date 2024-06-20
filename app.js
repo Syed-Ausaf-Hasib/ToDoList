@@ -1,7 +1,5 @@
 // i request express bodyparser 
 // jshint esversion: 6
-// learning gittt
-// creating a branch
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -62,6 +60,25 @@ app.post("/", function (req, res) {
     })
     item.save();
     res.redirect('/');
+});
+
+app.post("/check", function(req,res){
+    const CheckedItemId= req.body.checkbox;
+    async function checkItem(){
+        try{
+            if(CheckedItemId.length===2){
+                await Item.updateOne({_id:CheckedItemId[0]},{check:"on"})
+            }
+            else{
+                await Item.updateOne({_id:CheckedItemId},{check:"off"})
+            }
+            res.redirect("/");
+        }
+        catch(err){
+            console.log("Im stuckkk");
+        }
+    }
+    checkItem();
 });
 
 app.post("/delete", function(req,res){
