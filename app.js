@@ -15,7 +15,8 @@ app.set('view engine', 'ejs');
 
 mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});
 const itemsSchema = {
-    name: String
+    name: String,
+    check: String
 };
 const Item=mongoose.model("Item", itemsSchema);
 
@@ -33,17 +34,17 @@ const Item=mongoose.model("Item", itemsSchema);
 
 // const items=[];
 app.get("/", function (req, res) {
-    // var today = new Date();
-    // var options = {
-    //     weekday: 'long',
-    //     day: 'numeric',
-    //     month: 'long'
-    // };
-    // var day = today.toLocaleDateString("en-US", options);
+    var today = new Date();
+    var options = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+    };
+    var day = today.toLocaleDateString("en-US", options);
     async function finding(){
         try{
             const founditems=await Item.find({});
-            res.render("list", { kindOfDay: 'Today', newListItems: founditems });
+            res.render("list", { kindOfDay: day, newListItems: founditems });
         }
         catch{
             console.log("Some error occurred!!");
@@ -56,11 +57,25 @@ app.post("/", function (req, res) {
     const itemName = req.body.newItem;
     // items.push(item); coz items array doesnt exist now
     const item = new Item({
-        name: itemName
+        name: itemName,
+        check: 'off'
     })
     item.save();
     res.redirect('/');
 });
+
+app.post("/delete", function(req,res){
+    async function deleteItem(){
+        try{
+            await Item.deleteMany({check:'on'});
+            res.redirect('/');
+        }
+        catch(err){
+            console.log('error in deleting');
+        }
+    }
+    deleteItem();
+})
 
 app.listen(process.env.POST || 3000, function () {
     console.log("Port is Running at 3000");

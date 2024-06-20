@@ -16,9 +16,14 @@
                 <p><%=item.name%></p>
             </div>
         <% }) %>
+
         <form class="item" id="itemForm" action="/" method="post">
             <input type="text" name="newItem" placeholder="New Item" autofocus autocomplete="off">
-            <button type="submit" name="button">+</button>
+            <button type="submit" class="add" name="button">+</button>
+        </form>
+
+        <form class="delete" action="/delete" method="post">
+            <button type="submit" class="delete" name="delete">Delete Checked</button>
         </form>
     </div>
 </body>
