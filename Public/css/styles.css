@@ -45,7 +45,7 @@ h1 {
 input:checked+p {
   /* text-decoration: line-through;
     text-decoration-color: #2a0000; */
-  animation: done 0.5s forwards ease-in;
+  animation: done 0s forwards ease-in;
 }
 
 input[type="checkbox"] {

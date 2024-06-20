@@ -64,10 +64,10 @@ app.post("/", function (req, res) {
 
 app.post("/check", function(req,res){
     const CheckedItemId= req.body.checkbox;
-    console.log(CheckedItemId)
+    // console.log(CheckedItemId)
     async function checkItem(){
         try{
-            console.log(CheckedItemId)
+            // console.log(CheckedItemId)
             if(CheckedItemId.length==2){
                 await Item.updateOne({_id:CheckedItemId[0]},{check:"on"})
                 // console.log("On")
