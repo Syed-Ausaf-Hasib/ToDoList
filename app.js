@@ -18,19 +18,6 @@ const itemsSchema = {
 };
 const Item=mongoose.model("Item", itemsSchema);
 
-// const item1 = new Item({
-//     name:"Running"
-// });
-// const item2 = new Item({
-//     name:"Crying"
-// });
-// const item3 = new Item({
-//     name:"Coding"
-// });
-// const defaultItems = [item1,item2,item3];
-// Item.insertMany(defaultItems);
-
-// const items=[];
 app.get("/", function (req, res) {
     var today = new Date();
     var options = {

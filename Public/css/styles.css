@@ -1,8 +1,12 @@
 html {
   background-color: #1E1E1E;
-  background-image: -webkit-linear-gradient(65deg, #2a0000 50%, #333333 50%);
-  min-height: 1000px;
+  background-image: -webkit-linear-gradient(65deg, #2a0000 0%, #333333 100%);
+  min-height: 100vh;
   font-family: 'Helvetica Neue';
+}
+body{
+  margin: none;
+  height: auto;
 }
 
 h1 {
@@ -14,6 +18,8 @@ h1 {
 .title{
   display: flex;
   align-items: center;
+  background-color: #2a0000;
+  height: 40px;
 }
 .logo{
   width: 50px;
@@ -143,7 +149,58 @@ input[type="text"]:focus {
 footer {
   color: rgba(255, 255, 255, 0.5);
   text-align: center;
-  margin-top: 65vh;
+  margin-top: 20px;
+}
+
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0; /* Left-aligned */
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  padding-top: 60px; /* Place content 60px from the top */
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #2a0000;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: black;
+}
+
+li{
+  color: #858585;
 }
 
 @keyframes done {

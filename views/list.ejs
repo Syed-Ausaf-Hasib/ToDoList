@@ -1,9 +1,29 @@
 <%- include("header") -%>
 <body>
-    <div class="title">
-        <img class="logo" src="logo/logo.png">
-        <h1 class="credits">ToDoList by Syed Ausaf Hasib</h1>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="tech">
+            <p>Tech Used:</p>
+            <ul>
+                <li>EJS</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>NodeJS</li>
+                <li>ExpressJS</li>
+                <li>MongoDB</li>
+            </ul>
+        </div>
+        <div class="tools">
+            <p>Tools Used:</p>
+            <ul>
+                <li>Git</li>
+                <li>GitHub</li>
+                <li>Heroku</li>
+                <li>MongoAtlas</li>
+            </ul>
+        </div>
     </div>
+    <span class="openbtn" onclick="openNav()">&#9776;</span>
     <div class="box" id="heading">
         <h1><%= kindOfDay %></h1>
     </div>
@@ -39,4 +59,13 @@
         </form>
     </div>
 </body>
-<!-- <%- include("footer") -%> -->
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<%- include("footer") -%>
