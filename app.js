@@ -68,11 +68,12 @@ app.post("/check", function(req,res){
         try{
             if(CheckedItemId.length===2){
                 await Item.updateOne({_id:CheckedItemId[0]},{check:"on"})
+                console.log("on")
             }
             else{
                 await Item.updateOne({_id:CheckedItemId},{check:"off"})
+                console.log("off")
             }
-            res.redirect("/");
         }
         catch(err){
             console.log("Im stuckkk");

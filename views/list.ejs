@@ -17,8 +17,6 @@
         <% newListItems.forEach(function(item){ %>
             <form action="/check" method="post">
                 <div class="item scroll">
-                    <input type="hidden" name="checkbox" value="<%=item._id%>">
-                    <input type="checkbox" name="checkbox" value="<%=item._id%>" onclick="this.form.submit()">
                     <p><%=item.name%></p>
                 </div>
             </form>
