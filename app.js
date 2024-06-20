@@ -70,11 +70,11 @@ app.post("/check", function(req,res){
             console.log(CheckedItemId)
             if(CheckedItemId.length==2){
                 await Item.updateOne({_id:CheckedItemId[0]},{check:"on"})
-                console.log("On")
+                // console.log("On")
             }
             else{
                 await Item.updateOne({_id:CheckedItemId},{check:"off"})
-                console.log("Off")
+                // console.log("Off")
             }
             res.redirect("/")
         }
