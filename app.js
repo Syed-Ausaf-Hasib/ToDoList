@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("Public"));
 app.set('view engine', 'ejs');
 
-mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});
+mongoose.connect("mongodb+srv://AusafHasib:KNAxZ8LH768c@cluster0.aelg0ut.mongodb.net/todolistDB",{useNewUrlParser: true});
 const itemsSchema = {
     name: String,
     check: String
@@ -85,6 +85,6 @@ app.post("/delete", function(req,res){
     deleteItem();
 })
 
-app.listen(process.env.POST || 3000, function () {
+app.listen(process.env.PORT || 3000, function () {
     console.log("Port is Running at 3000");
 });
