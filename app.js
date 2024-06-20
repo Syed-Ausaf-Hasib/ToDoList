@@ -33,7 +33,7 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
     var item = req.body.newItem;
     items.push(item);
-    res.status(200).send("Item added successfully!");
+    res.redirect('/');
 });
 
 app.listen(process.env.POST || 3000, function () {
