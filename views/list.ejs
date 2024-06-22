@@ -28,15 +28,10 @@
         <h1><%= kindOfDay %></h1>
     </div>
     <div class="box">
-        <!-- <% for(var i=0; i<newListItems.length; i++){ %>
-            <div class="item">
-                <input type="checkbox">
-                <p><%=newListItems[i].name%></p>
-            </div>
-        <% } %> -->
         <% newListItems.forEach(function(item){ %>
             <form action="/check" method="post">
                 <div class="item scroll">
+                    <!-- This is to keep the check box checked if it was check:on in database -->
                     <% if(item.check=="on"){ %>
                         <input type="hidden" name="checkbox" value="<%=item._id%>">
                         <input type="checkbox" name="checkbox" value="<%=item._id%>" checked onclick="this.form.submit()">
@@ -44,7 +39,8 @@
                         <input type="hidden" name="checkbox" value="<%=item._id%>">
                         <input type="checkbox" name="checkbox" value="<%=item._id%>" onclick="this.form.submit()">
                     <% } %>
-                    <p><%=item.name%></p>
+                    <p><%= item.name %></p>
+                    <i class="fa" name="editor" onclick="submitEditForm('<%= item._id %>')">&#xf040;</i>
                 </div>
             </form>
         <% }) %>
@@ -58,6 +54,11 @@
             <button type="submit" class="delete" name="delete">Delete Checked</button>
         </form>
     </div>
+    <% newListItems.forEach(function(item){ %>
+        <form id="editForm_<%= item._id %>" action="/edit" method="post">
+            <input type="hidden" name="editor" value="<%= item._id %>">
+        </form>
+    <% }) %>
 </body>
 <script>
     function openNav() {
@@ -66,6 +67,9 @@
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
+    }
+    function submitEditForm(itemId) {
+        document.getElementById('editForm_' + itemId).submit();
     }
 </script>
 <%- include("footer") -%>

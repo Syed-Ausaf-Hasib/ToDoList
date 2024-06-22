@@ -18,6 +18,7 @@ const itemsSchema = {
 };
 const Item=mongoose.model("Item", itemsSchema);
 
+//Main get method to render all the list elements 
 app.get("/", function (req, res) {
     var today = new Date();
     var options = {
@@ -38,6 +39,7 @@ app.get("/", function (req, res) {
     finding();
 });
 
+//Whenever we enter a new item, data comes here and it is added to database
 app.post("/", function (req, res) {
     const itemName = req.body.newItem;
     // items.push(item); coz items array doesnt exist now
@@ -49,12 +51,13 @@ app.post("/", function (req, res) {
     res.redirect('/');
 });
 
+//Whenever the checkbox is chosen, it update that objects attribute "check" to on, this is needed to "delete all checked"
 app.post("/check", function(req,res){
     const CheckedItemId= req.body.checkbox;
-    // console.log(CheckedItemId)
     async function checkItem(){
         try{
             // console.log(CheckedItemId)
+            // when on we get a list of id repeated twice, when off, we simply get id
             if(CheckedItemId.length==2){
                 await Item.updateOne({_id:CheckedItemId[0]},{check:"on"})
                 // console.log("On")
@@ -72,6 +75,37 @@ app.post("/check", function(req,res){
     checkItem();
 });
 
+//Whenever the pen icon is pressed, the data of that field comes here and i already placed as a default into the text field as prefix
+app.post("/edit", function(req,res){
+    const editid=req.body.editor;
+    async function name(){
+        try{
+            const prefix= await Item.findOne({_id:editid})
+            res.render("editfield", {Id:editid, prefix:prefix.name})
+        }
+        catch{
+            console.log("Cant find prefix")
+        }
+    }
+    name()
+})
+//The new prefix+newValue is sent here to update it in database
+app.post("/updateedit", function(req,res){
+    const newValue=req.body.newItem
+    const Id=req.body.editorId
+    async function updateedit(){
+        try{
+            await Item.updateOne({_id:Id},{name:newValue})
+            res.redirect("/");
+        }
+        catch{
+            console.log("Cant Update")
+        }
+    }
+    updateedit()
+})
+
+//Whenever the delete checked is pressed, this deleteMany will find all check:on attribute and delete them
 app.post("/delete", function(req,res){
     async function deleteItem(){
         try{

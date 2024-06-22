@@ -1,0 +1,46 @@
+<%- include("header") -%>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="tech">
+            <p>Tech Used:</p>
+            <ul>
+                <li>EJS</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>NodeJS</li>
+                <li>ExpressJS</li>
+                <li>MongoDB</li>
+            </ul>
+        </div>
+        <div class="tools">
+            <p>Tools Used:</p>
+            <ul>
+                <li>Git</li>
+                <li>GitHub</li>
+                <li>Vercel</li>
+                <li>MongoAtlas</li>
+            </ul>
+        </div>
+    </div>
+    <span class="openbtn" onclick="openNav()">&#9776;</span>
+    <div class="box" id="heading">
+        <h1>Change value</h1>
+    </div>
+    <div class="box">
+        <form class="item" id="itemForm" action="/updateedit" method="post">
+            <input type="hidden" name="editorId" value="<%= Id %>">
+            <input type="text" name="newItem" placeholder="Edit Item" value="<%= prefix %>" autocomplete="off">
+            <button type="submit" class="add" name="button">&#10004;</button>
+        </form>
+    </div>
+</body>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<%- include("footer") -%>
